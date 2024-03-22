@@ -158,6 +158,16 @@ app.post('/api/register', async (req, res) => {
     }
   });
 
+  app.put('/api/dashboard/:id', authenticateToken, async (req, res) => {
+    try {
+      await BookingModel.findByIdAndUpdate(req.params.id, req.body);
+      res.status(204).send();
+    } catch (error) {
+      console.error('Error updating booking:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
 app.listen(8080,async ()=>{
     try{
         console.log("Connection Established");
