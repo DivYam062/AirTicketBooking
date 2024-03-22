@@ -1,8 +1,7 @@
 const express=require("express");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('./db');
-const { FlightModel } = require('./db');
+const { connection,UserModel,Flightmodel,BookingModel } = require('./db');
 
 const app=express();
 
@@ -180,6 +179,7 @@ app.post('/api/register', async (req, res) => {
 
 app.listen(8080,async ()=>{
     try{
+        await connection;
         console.log("Connection Established");
     }
     catch(error){

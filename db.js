@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema }=mongoose;
 
-mongoose.connect(`mongodb+srv://divyamrauthan002:access123@cluster0.f4zllst.mongodb.net/data`);
+const connection = mongoose.connect(`mongodb+srv://divyamrauthan002:access123@cluster0.f4zllst.mongodb.net/data`);
 
 const userSchema = new Schema({
     name: { type: String, required: true },
@@ -22,8 +22,8 @@ const flightSchema = new Schema({
 
 const bookingSchema = new Schema({
     title: { type: String},
-    user: { type: ObjectId, ref:'User'},
-    flight: { type: ObjectId, ref:'Flight'},
+    user: { type: mongoose.Schema.Types.ObjectId, ref:'User'},
+    flight: { type: mongoose.Schema.Types.ObjectId, ref:'Flight'},
 });
   
 const Usermodel = mongoose.model("User", userSchema);
