@@ -148,6 +148,16 @@ app.post('/api/register', async (req, res) => {
     }
   });
 
+  app.get('/api/dashboard', authenticateToken, async (req, res) => {
+    try {
+      const bookings = await BookingModel.find().populate('user').populate('flight');
+      res.status(200).json(bookings);
+    } catch (error) {
+      console.error('Error getting bookings:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
 app.listen(8080,async ()=>{
     try{
         console.log("Connection Established");
