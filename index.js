@@ -168,6 +168,16 @@ app.post('/api/register', async (req, res) => {
     }
   });
 
+  app.delete('/api/dashboard/:id', authenticateToken, async (req, res) => {
+    try {
+      await BookingModel.findByIdAndDelete(req.params.id);
+      res.status(202).json({ message: 'Booking deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+
 app.listen(8080,async ()=>{
     try{
         console.log("Connection Established");
